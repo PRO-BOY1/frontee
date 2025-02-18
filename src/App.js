@@ -1,17 +1,16 @@
+// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import HomePage from './HomePage';
 import LoginPage from './LoginPage';
-import Dashboard from './Dashboard';
 
-const App = () => {
+function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact component={LoginPage} />
-        <Route path="/dashboard" component={Dashboard} />
-      </Switch>
-    </Router>
+    <Switch>
+      <Route path="/" exact component={HomePage} />
+      <Route path="/login" component={LoginPage} />
+    </Switch>
   );
-};
+}
 
 export default App;
