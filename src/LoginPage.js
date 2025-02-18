@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -10,7 +10,7 @@ const LoginPage = () => {
     e.preventDefault();
     // Call backend API to authenticate
     // For now, simulate success and redirect to the dashboard
-    history.push('/dashboard');
+    navigate('/dashboard');
   };
 
   return (
