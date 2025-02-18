@@ -1,33 +1,25 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch("https://law-town-web.up.railway.app/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, { email, password });
 
-      const data = await response.json();
+      // Save token to localStorage
+      localStorage.setItem("token", res.data.token);
 
-      if (response.ok) {
-        // Login successful, redirect to dashboard
-        window.location.href = "/dashboard";
-      } else {
-        // Show error message
-        setError(data.message || "Invalid email or password");
-      }
+      // Redirect to dashboard
+      router.push("/dashboard");
     } catch (err) {
-      setError("Server error. Please try again later.");
+      setError("Invalid email or password");
     }
   };
 
