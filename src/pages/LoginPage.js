@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
+ const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,7 +17,7 @@ const LoginPage = () => {
       localStorage.setItem("token", res.data.token);
 
       // Redirect to dashboard
-      router.push("/dashboard");
+      navigate("/dashboard");
     } catch (err) {
       setError("Invalid email or password");
     }
